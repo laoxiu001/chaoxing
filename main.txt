@@ -1,0 +1,42 @@
+Delay 1000
+//延时1000毫秒运行一次以下代码
+
+Hwnd = Plugin.Window.Find(0, "学生学习页面")
+//返回指定标题窗口的句柄Hwnd
+
+Call Plugin.Window.SetClientSize(Hwnd, 600, 600)
+//改变窗口客户区大小为(600,600)
+
+
+XY = Plugin.Bkgnd.FindColor(Hwnd, 0, 500, 83, 540, "FFFFFF")
+ZB = InStr(XY, "|")
+X = Clng(Left(XY, ZB - 1)) : Y = Clng(Right(XY, Len(XY) - ZB))
+//寻找暂停图标
+If X > 0 And Y > 0 Then 
+//成功找到暂停图标,说明课程已暂停
+Call Plugin.Bkgnd.LeftClick(Hwnd, 31, 516)
+//点击继续播放
+End If
+
+
+XY = Plugin.Bkgnd.FindColor(Hwnd, 330, 325, 450, 345, "666666")
+ZB = InStr(XY, "|")
+X = Clng(Left(XY, ZB - 1)): Y = Clng(Right(XY, Len(XY) - ZB))
+//寻找提交按钮
+If X > 0 And Y > 0 Then 
+//成功找到提交按钮,说明中间有题目跳出来
+Call Plugin.Bkgnd.LeftClick(Hwnd, 120, 210)
+//选择A
+Delay 800
+Call Plugin.Bkgnd.LeftClick(Hwnd, 395, 335)
+//提交A
+Delay 800
+Call Plugin.Bkgnd.LeftClick(Hwnd, 100, 265)
+//选择B
+Delay 800
+Call Plugin.Bkgnd.LeftClick(Hwnd, 395, 335)
+//提交B
+Delay 800
+Call Plugin.Bkgnd.LeftClick(Hwnd, 395, 335)
+//继续
+End If
